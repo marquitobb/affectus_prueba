@@ -4,7 +4,9 @@ this front-end affectus project
 
 ## steps created project
 
-1.- npm install @material-ui/core
+1.- npm install @material-ui/core and npm install -s @material-ui/icons
+
+2.- 
 
 ## help links
 

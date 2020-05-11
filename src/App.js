@@ -1,11 +1,10 @@
 import React from 'react';
+import SignInSide from './views/login/login';
 
 class App extends React.Component{
   render() {
     return (
-      <div>
-        <h1>affectus live</h1>
-      </div>
+      <SignInSide />
     );
   }
 }

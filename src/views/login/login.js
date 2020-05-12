@@ -12,6 +12,7 @@ import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
+import axios from 'axios';
 
 function Copyright() {
   return (
@@ -65,11 +66,31 @@ export default function SignInSide() {
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
 
-  const handleSubmit = (evt) => {
+  const handleSubmit = async(evt) => {
     evt.preventDefault();
     console.log(`correo--> ${email}`)
     console.log(`pass--> ${pass}`)
+
+    axios.post('https://affectuslive.herokuapp.com/user/login', {
+      email: email,
+	    pass: pass
+    })
+    .then((response) => {
+      console.log(response.data);
+      const data = response.data
+      console.log(data.status);
+      if (parseInt(data.status) === 1) {
+        window.location='main'; //rediect page with js vanilla
+      }else{
+        alert("usuario o contraseña incorrecta")
+      }
+    }, (error) => {
+      console.log(error);
+    });
+    setEmail("")
+    setPass("")
   }
+
 
   return (
     <Grid container component="main" className={classes.root}>
@@ -133,7 +154,7 @@ export default function SignInSide() {
               </Grid>
               */}
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link href="/register" variant="body2">
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>

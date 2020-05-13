@@ -15,3 +15,5 @@ this front-end affectus project
 * [using hooks in form](https://rangle.io/blog/simplifying-controlled-inputs-with-hooks/)
 
 * [about axios post](https://blog.logrocket.com/how-to-make-http-requests-like-a-pro-with-axios)
+
+* [Redireccionar al login en react](https://stackoverflow.com/questions/54579730/react-hooks-with-react-router-v4-how-do-i-redirect-to-another-route)

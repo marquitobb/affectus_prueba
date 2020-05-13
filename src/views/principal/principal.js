@@ -1,6 +1,18 @@
 import React from "react";
 
 class Principal extends React.Component{
+    constructor(props) {
+        super(props);
+        const { id } = this.props.match.params 
+        if (parseInt(id) === 96) {
+            console.log(id)
+        }else{
+            window.location='/main';
+        } 
+    }
+    
+    
+
     render() {
         return (
             <div>

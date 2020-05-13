@@ -13,12 +13,13 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import axios from 'axios';
+import { withRouter } from 'react-router-dom';
 
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
+      <Link color="inherit" href="/#">
         marco y tovar
       </Link>{' '}
       {new Date().getFullYear()}
@@ -59,7 +60,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignInSide() {
+function SignInSide(props) {
   
   const classes = useStyles();
 
@@ -70,6 +71,7 @@ export default function SignInSide() {
     evt.preventDefault();
     console.log(`correo--> ${email}`)
     console.log(`pass--> ${pass}`)
+    let destUrlEdit = `/main/${96}`
 
     axios.post('https://affectuslive.herokuapp.com/user/login', {
       email: email,
@@ -80,7 +82,9 @@ export default function SignInSide() {
       const data = response.data
       console.log(data.status);
       if (parseInt(data.status) === 1) {
-        window.location='main'; //rediect page with js vanilla
+        localStorage.setItem('usertoken', response.data)
+        props.history.push(destUrlEdit);
+        //window.location='/main'; //rediect page with js vanilla
       }else{
         alert("usuario o contraseña incorrecta")
       }
@@ -168,3 +172,5 @@ export default function SignInSide() {
     </Grid>
   );
 }
+
+export default withRouter(SignInSide)

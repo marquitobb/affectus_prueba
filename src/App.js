@@ -10,7 +10,7 @@ import RegisterUser from './views/register/register-user';
 const App = () => (
   <BrowserRouter>    
     <Switch>
-        <Route exact path="/" component={SignInSide} />   
+        <Route exact path="/" component={SignInSide} />          
         <Route path="/main/:id" component={Principal} />
         <Route exact path="/register" component={RegisterUser} />
         <Route component={NotFound} />

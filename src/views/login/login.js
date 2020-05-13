@@ -14,6 +14,12 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import axios from 'axios';
 import { withRouter } from 'react-router-dom';
+//cryptr id user
+const Cryptr = require('cryptr');
+const cryptr = new Cryptr('myTotalySecretKey');
+//encrypter two
+var CryptoJS = require("crypto-js");
+
 
 function Copyright() {
   return (
@@ -61,17 +67,18 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function SignInSide(props) {
-  
+  //using styles
   const classes = useStyles();
-
+  //hooks state
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
-
+  //clear all session 
+  localStorage.clear();
+  //submit validation login
   const handleSubmit = async(evt) => {
     evt.preventDefault();
     console.log(`correo--> ${email}`)
     console.log(`pass--> ${pass}`)
-    let destUrlEdit = `/main/${96}`
 
     axios.post('https://affectuslive.herokuapp.com/user/login', {
       email: email,
@@ -82,8 +89,12 @@ function SignInSide(props) {
       const data = response.data
       console.log(data.status);
       if (parseInt(data.status) === 1) {
-        localStorage.setItem('usertoken', response.data)
+        //var encryptedId = CryptoJS.AES.encrypt(data.id, 'secret key 123');
+        //const encryptedId = cryptr.encrypt(data.id);
+        let destUrlEdit = `/main/${data.id}` //path containing user id 
+        localStorage.setItem('mydata', data.id)
         props.history.push(destUrlEdit);
+        //console.log( localStorage.getItem('mydata'));
         //window.location='/main'; //rediect page with js vanilla
       }else{
         alert("usuario o contraseña incorrecta")

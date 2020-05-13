@@ -14,11 +14,6 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import axios from 'axios';
 import { withRouter } from 'react-router-dom';
-//cryptr id user
-const Cryptr = require('cryptr');
-const cryptr = new Cryptr('myTotalySecretKey');
-//encrypter two
-var CryptoJS = require("crypto-js");
 
 
 function Copyright() {
@@ -91,9 +86,8 @@ function SignInSide(props) {
       if (parseInt(data.status) === 1) {
         //var encryptedId = CryptoJS.AES.encrypt(data.id, 'secret key 123');
         //const encryptedId = cryptr.encrypt(data.id);
-        let destUrlEdit = `/main/${data.id}` //path containing user id 
         localStorage.setItem('mydata', data.id)
-        props.history.push(destUrlEdit);
+        props.history.push("/main");
         //console.log( localStorage.getItem('mydata'));
         //window.location='/main'; //rediect page with js vanilla
       }else{

@@ -61,7 +61,7 @@ class RegisterUser extends React.Component{
                 pass:""
             })
         }, (error) => {
-            alert("no guardo usuario")
+            alert("Usuario invalido")
             console.log(error);
         });
         event.preventDefault()
@@ -70,34 +70,36 @@ class RegisterUser extends React.Component{
     render() {
         return (
             <div className="container">                        
-                <div class="p-3 mb-2 bg-info text-white">
+                <div className="p-3 mb-2 bg-info text-white">
                     <h1>Registrate</h1>
                 </div>
                 <form onSubmit={this.handleSubmit}>
                     <div className="form-row">
                         <div className="form-group col-md-6">
-                        <label for="inputEmail4">Email</label>
+                        <label htmlFor="inputEmail4">Email</label>
                         <input 
                         type="email" 
                         className="form-control" 
                         id="inputEmail4"
                         value={this.state.email}
                         onChange={this.handleEmail}
+                        required
                         />
                         </div>
                         <div className="form-group col-md-6">
-                        <label for="inputPass">Password</label>
+                        <label htmlFor="inputPass">Password</label>
                         <input 
                         type="password" 
                         className="form-control" 
                         id="inputPass"
                         value={this.state.pass}
                         onChange={this.handlePass}
+                        required
                         />
                         </div>
                     </div>
                     <div className="form-group">
-                        <label for="nucontrol">N.Control</label>
+                        <label htmlFor="nucontrol">N.Control</label>
                         <input 
                         type="number" 
                         className="form-control" 
@@ -105,28 +107,30 @@ class RegisterUser extends React.Component{
                         placeholder="" 
                         required
                         value={this.state.nucontrol}
-                        onChange={this.handleNucontrol}
+                        onChange={this.handleNucontrol}                        
                         />
                     </div>
                     <div className="form-row">
                     <div className="form-group col-md-6">
-                        <label for="inputName">Nombre</label>
+                        <label htmlFor="inputName">Nombre</label>
                         <input 
                         type="text" 
                         className="form-control" 
                         id="inputName"
                         value={this.state.name}
                         onChange={this.handleName}
+                        required
                         />
                         </div>
                         <div className="form-group col-md-6">
-                        <label for="inputApellido">Apellido</label>
+                        <label htmlFor="inputApellido">Apellido</label>
                         <input 
                         type="text" 
                         className="form-control" 
                         id="inputApellido"
                         value={this.state.lastname}
                         onChange={this.handleLastname}
+                        required
                         />
                         </div>
                     </div>

@@ -1,28 +1,23 @@
 import React from "react";
-const Cryptr = require('cryptr');
-const cryptr = new Cryptr('myTotalySecretKey');
-var CryptoJS = require("crypto-js");
 
 class Principal extends React.Component{
     constructor(props) {
-        super(props);
-        const { id } = this.props.match.params 
+        super(props);        
         this.state = {
-            idUser: id 
+            idUser: localStorage.getItem('mydata')
         }
         if (localStorage.getItem('mydata')) {
             console.log("session iniciada");
         } else {
-            window.location='/notfound';
+            window.location='/';
         }
         console.log(localStorage.getItem('mydata'));
     }
     
-    /*componentDidMount(){
-        //const decryptedId = cryptr.decrypt(id);
-        var decryptedId = this.state.idUser.toString(CryptoJS.enc.Utf8);
-        console.log(decryptedId) 
-    }*/
+    componentDidMount(){
+        //clear all session 
+        localStorage.clear();
+    }
 
     validar = () => {
 
@@ -30,11 +25,13 @@ class Principal extends React.Component{
     
 
     render() {
-        return (
-            <div>
-                <h1>Principal page</h1>
-            </div>
-        );
+        if (this.state.idUser) {
+            return (
+                <div>
+                    <h1>Principal page</h1>
+                </div>
+            );
+        }
     }
 }
 

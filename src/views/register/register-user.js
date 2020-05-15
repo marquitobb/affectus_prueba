@@ -53,6 +53,8 @@ class RegisterUser extends React.Component{
         })
         .then((response) => {
             //alert(response.data);
+            window.location='/';
+            //this.props.history.push("/");
             this.setState({
                 nucontrol:0,
                 name:"",

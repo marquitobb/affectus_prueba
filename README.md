@@ -21,3 +21,5 @@ this front-end affectus project
 * [Redireccionar al login en react](https://stackoverflow.com/questions/54579730/react-hooks-with-react-router-v4-how-do-i-redirect-to-another-route)
 
 * [session local storage](https://www.robinwieruch.de/local-storage-react)
+
+* [convert html to jsx](https://magic.reactjs.net/htmltojsx.htm)

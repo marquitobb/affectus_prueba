@@ -66,7 +66,7 @@ class Principal extends React.Component{
                             <a className="dropdown-item" onClick={() => this.actState('mexico')} href="#">Mexico</a>
                             <a className="dropdown-item" onClick={() => this.actState('panama')} href="#">Panamá</a>
                             <div className="dropdown-divider" />
-                            <a className="dropdown-item" href="/colima">Colima</a>
+                            <a className="dropdown-item"onClick={() => this.actState('colima')} href="#">Colima</a>
                           </div>
                         </li>
                       </ul>

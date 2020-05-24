@@ -8,6 +8,7 @@ import Italy from "../country/italy";
 import Mexico from "../country/mexico";
 import Panama from "../country/panama";
 import Spain from "../country/spain";
+import { Link } from "react-router-dom";
 
 class Principal extends React.Component{
     constructor(props) {
@@ -17,9 +18,10 @@ class Principal extends React.Component{
             count: 'principal',
         }
         if (localStorage.getItem('mydata')) {
-            console.log("session iniciada");
+          console.log("session iniciada");
         } else {
-            window.location='/';
+          alert('debes iniciar session primero')
+          window.location='/';
         }
         console.log(localStorage.getItem('mydata'));
     }
@@ -70,6 +72,9 @@ class Principal extends React.Component{
                           </div>
                         </li>
                       </ul>
+                      <Link to="/main/upload">
+                        <a className="nav-link" >subir archivo</a>                      
+                      </Link>
                       <form className="form-inline my-2 my-lg-0">
                         <a className="nav-link" href="/">Cerrar sesión</a>
                       </form>

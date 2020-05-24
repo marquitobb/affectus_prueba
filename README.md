@@ -23,3 +23,5 @@ this front-end affectus project
 * [session local storage](https://www.robinwieruch.de/local-storage-react)
 
 * [convert html to jsx](https://magic.reactjs.net/htmltojsx.htm)
+
+* [upload](https://programmingwithmosh.com/javascript/react-file-upload-proper-server-side-nodejs-easy/)

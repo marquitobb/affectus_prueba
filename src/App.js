@@ -5,12 +5,14 @@ import Logindos from './views/login/login2';
 import Principal from './views/principal/principal';
 import NotFound from "./Notfound";
 import RegisterUser from './views/register/register-user';
+import SaveFile from './views/savefile/saveFile'
 
 const App = () => (
   <BrowserRouter>    
     <Switch>
         <Route exact path="/" component={Logindos} />          
-        <Route path="/main" component={Principal} />
+        <Route exact path="/main" component={Principal} />
+        <Route path="/main/upload" component={SaveFile} />
         <Route exact path="/register" component={RegisterUser} />        
         <Route component={NotFound} />
     </Switch>

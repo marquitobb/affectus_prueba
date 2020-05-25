@@ -25,3 +25,7 @@ this front-end affectus project
 * [convert html to jsx](https://magic.reactjs.net/htmltojsx.htm)
 
 * [upload](https://programmingwithmosh.com/javascript/react-file-upload-proper-server-side-nodejs-easy/)
+
+* [more about axios](https://stackoverflow.com/questions/47630163/axios-post-request-to-send-form-data)
+
+* [How to download files using axios](https://stackoverflow.com/questions/41938718/how-to-download-files-using-axios)

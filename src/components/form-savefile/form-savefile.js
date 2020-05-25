@@ -1,44 +1,15 @@
 import React from 'react'
-import axios, {post} from 'axios';
+import axios from 'axios';
 
 class FormSaveFile extends React.Component{
     constructor(props) {
         super(props);
         this.state={
-            selectedFile: null
+            selectedFile: null,
+            ruta:'colima'
         }
     }
     
-   /*onChange(e){
-        let files = e.target.files
-        
-        let reader = new FileReader()
-        reader.readAsDataURL(files[0])
-
-        var fileObject = this.refs.uploader.getFileObject()
-        var formData = files
-        formData.append('file', fileObject);
-        const url = "http://localhost:4000/savefile/subir"
-
-        fetch(url, {
-            method: 'POST',
-            body: formData
-        });
-        
-        reader.onload=(e)=>{        
-            const formdata = {file: e.target.result}
-            
-            return post(url, formdata)
-                .then(response => console.warn("result", response))
-            const formData = 
-            formData.append('file', fileObject);
-            fetch(url, {
-                method: 'POST',
-                body: formdata
-            });
-        }
-    }*/
-
     onChangeHandler=event=>{
         console.log(event.target.files[0])
         this.setState({
@@ -47,22 +18,66 @@ class FormSaveFile extends React.Component{
         })
     }
 
+    handleRuta = async (event) =>{
+        await this.setState({
+            ruta: event.target.value
+        })  
+        console.log(this.state.ruta);
+    }
+
     onClickHandler = () => {
-        const data = new FormData() 
+        const data = new FormData()
+
+        data.append('ruta', this.state.ruta)
         data.append('file', this.state.selectedFile)
-        axios.post("http://localhost:4000/savefile/subir", data, { 
-            // receive two parameter endpoint url ,form data 
-        }).then(res => { // then print response status
-            console.log(res.statusText)
+        
+        axios({
+            method: 'post',
+            url: 'http://localhost:4000/savefile/subir',
+            data: data,
+            headers: {'Content-Type': 'multipart/form-data' }
         })
+        .then(function (response) {
+            //handle success
+            console.log(response);
+        })
+        .catch(function (response) {
+            //handle error
+            console.log(response);
+        });
+
+        /*var data = {
+            file: this.state.ruta
+        }
+        axios.post("http://localhost:4000/savefile/subir", { 
+            ruta: this.state.ruta
+        },data).then(res => { // then print response status
+            console.log(res.statusText)            
+        })
+        */
     }
 
     render() {
         return (
             <div>
-              <h1>React js file upload</h1>
-              <input type="file" name="file" onChange={this.onChangeHandler}/>
-              <button type="button" onClick={this.onClickHandler}>Upload</button>
+                <h1>Subir archivo en su pais</h1>
+                <input type="file" name="file" onChange={this.onChangeHandler}/>
+                {/*<input type="text" name="ruta" value={this.state.ruta} onChange={this.handleRuta}/>*/}
+                <br></br>
+                <br></br>
+                <label>selecciona el estado</label>
+                <select value={this.state.ruta} onChange={this.handleRuta}>
+                    <option value="colima">Colima</option>
+                    <option value="italia">Italia</option>
+                    <option value="spain">España</option>
+                    <option value="francia">Francia</option>
+                    <option value="eua">EUA</option>
+                    <option value="mexico">Mexico</option>
+                    <option value="panama">Panama</option>
+                </select>
+                <br></br>
+                <br></br>
+                <button type="button" onClick={this.onClickHandler}>Enviar</button>
             </div>
         );
     }

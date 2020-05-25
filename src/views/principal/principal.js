@@ -8,7 +8,8 @@ import Italy from "../country/italy";
 import Mexico from "../country/mexico";
 import Panama from "../country/panama";
 import Spain from "../country/spain";
-import { Link } from "react-router-dom";
+//import { Link } from "react-router-dom";
+import FormSaveFile from '../../components/form-savefile/form-savefile'
 
 class Principal extends React.Component{
     constructor(props) {
@@ -71,10 +72,8 @@ class Principal extends React.Component{
                             <a className="dropdown-item"onClick={() => this.actState('colima')} href="#">Colima</a>
                           </div>
                         </li>
-                      </ul>
-                      <Link to="/main/upload">
-                        <a className="nav-link" >subir archivo</a>                      
-                      </Link>
+                      </ul>                      
+                      <a className="nav-link" onClick={() => this.actState('savefile')} href="#">subir archivo</a>                                            
                       <form className="form-inline my-2 my-lg-0">
                         <a className="nav-link" href="/">Cerrar sesión</a>
                       </form>
@@ -111,6 +110,8 @@ function Country(props) {
       return <Panama />;
     case 'spain':
       return <Spain />;
+    case 'savefile':
+      return <FormSaveFile />;
     default:
       return <h1>Welcome</h1>;
   }

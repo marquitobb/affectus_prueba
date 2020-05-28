@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
-import axios from 'axios';
-const FileDownload = require('js-file-download');
+//import axios from 'axios';
+//const FileDownload = require('js-file-download');
 
 class DowFile extends React.Component{
     constructor(props) {
@@ -19,7 +19,7 @@ class DowFile extends React.Component{
     
     viewfiles = async() =>{
         try {
-            const url = `http://localhost:4000/savefile/viewfiles?country=${this.state.pais}`
+            const url = `https://affectuslive.herokuapp.com/savefile/viewfiles?country=${this.state.pais}`
             let res = await fetch(url)
             let data = await res.json()
             
@@ -31,21 +31,14 @@ class DowFile extends React.Component{
             console.log(error);
         }
     }
-
-    dowlandFile = async (archivo) => {
-        console.log("archivo-->", archivo);
-        
-        const url = `http://localhost:4000/savefile/download?pais=colima&filename=${archivo}`
-        axios.get(url)
-        .then(response => {
-            // Obtenemos los datos
-            console.log(response); 
-            FileDownload(response.data, archivo);          
-        })
-        .catch(e => {
-            // Capturamos los errores
-            console.log(e);
-        })
+    
+    dowlandFile = (archivo) => {
+        try {
+            const url = `https://affectuslive.herokuapp.com/savefile/download?pais=${this.state.pais}&filename=${archivo}`
+            window.open(`${url}`)
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     render() {

@@ -70,7 +70,7 @@ class FormSaveFile extends React.Component{
                     <option value="colima">Colima</option>
                     <option value="italia">Italia</option>
                     <option value="spain">España</option>
-                    <option value="francia">Francia</option>
+                    <option value="france">Francia</option>
                     <option value="eua">EUA</option>
                     <option value="mexico">Mexico</option>
                     <option value="panama">Panama</option>

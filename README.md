@@ -29,3 +29,5 @@ this front-end affectus project
 * [more about axios](https://stackoverflow.com/questions/47630163/axios-post-request-to-send-form-data)
 
 * [How to download files using axios](https://stackoverflow.com/questions/41938718/how-to-download-files-using-axios)
+
+* [React-toastify](https://fkhadra.github.io/react-toastify/introduction)

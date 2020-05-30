@@ -1,13 +1,14 @@
 import React from "react";
 import axios from 'axios';
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 class RegisterUser extends React.Component{
     constructor(props) {
         super(props);
         this.state ={
             email: "",
             pass: "",
-            nucontrol: 0,
+            nucontrol: '',
             name: "",
             lastname: ""
         }
@@ -42,8 +43,9 @@ class RegisterUser extends React.Component{
           lastname: event.target.value
         })
     }
-
+    //function for user register
     handleSubmit = event => {
+        toast.info('espere un momento...')
         axios.post('https://affectuslive.herokuapp.com/user/saveuser', {
             nucontrol: this.state.nucontrol,
             name: this.state.name,
@@ -52,9 +54,8 @@ class RegisterUser extends React.Component{
             pass: this.state.pass
         })
         .then((response) => {
-            //alert(response.data);
-            window.location='/';
-            //this.props.history.push("/");
+            //alert(response.data);                        
+            toast.success('Usuario registrado')
             this.setState({
                 nucontrol:0,
                 name:"",
@@ -62,8 +63,10 @@ class RegisterUser extends React.Component{
                 email:"",
                 pass:""
             })
+            //this.props.history.push("/");
+            window.location='/';            
         }, (error) => {
-            alert("Usuario invalido")
+            toast.error('usuario invalido')
             console.log(error);
         });
         event.preventDefault()
@@ -71,7 +74,10 @@ class RegisterUser extends React.Component{
       
     render() {
         return (
-            <div className="container">                        
+            <div className="container">
+                <div className="form-group">
+                    <ToastContainer />
+                </div>
                 <div className="p-3 mb-2 bg-info text-white">
                     <h1>Registrate</h1>
                 </div>
@@ -136,11 +142,12 @@ class RegisterUser extends React.Component{
                         />
                         </div>
                     </div>
-                    <button type="submit" className="btn btn-primary">Registrar</button>
+                    <button type="submit" className="btn btn-primary">Registrar</button>                    
                 </form>
             </div>
         );
     }
 }
+
 
 export default RegisterUser

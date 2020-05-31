@@ -23,8 +23,7 @@ class FormSaveFile extends React.Component{
     handleRuta = async (event) =>{
         await this.setState({
             ruta: event.target.value
-        })  
-        console.log(this.state.ruta);
+        })          
     }
 
     onClickHandler = () => {
@@ -75,10 +74,18 @@ class FormSaveFile extends React.Component{
                 </select>
                 <br></br>
                 <br></br>
-                <button type="button" onClick={this.onClickHandler}>Enviar</button>                               
+                <button type="button" onClick={this.onClickHandler}>Enviar</button>
+                <br></br><br></br>                           
+                <DeleteFile 
+                ruta = {this.state.ruta}
+                />
             </div>
         );
     }
 }
+
+
+
+
 
 export default FormSaveFile

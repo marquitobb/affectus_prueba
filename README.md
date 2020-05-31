@@ -31,3 +31,5 @@ this front-end affectus project
 * [How to download files using axios](https://stackoverflow.com/questions/41938718/how-to-download-files-using-axios)
 
 * [React-toastify](https://fkhadra.github.io/react-toastify/introduction)
+
+* [Calling a method inside getDerivedStateFromProps in React](https://stackoverflow.com/questions/49664867/calling-a-method-inside-getderivedstatefromprops-in-react)

@@ -5,20 +5,35 @@ import React from 'react';
 
 class DeleteFile extends React.Component{
     constructor(props) {
-        super(props);        
-        this.state = {
-            pais: 'colima',
+        super(props);               
+        this.state = { 
+            band: true,           
             selectFile: '',
-            nameFile: [],            
+            nameFile: [], 
+            pais:'colima'        
         }
+        this.viewfiles()
+        
     }
 
-    componentDidMount(){
-        this.viewfiles()
+    static getDerivedStateFromProps(props, state) {
+        console.log("props ruta-->",props.ruta);        
+        return {
+            pais: props.ruta
+        }        
     }
+
+    componentDidUpdate(prevProps){
+        if ( prevProps.ruta !== this.state.pais ) {
+          this.viewfiles(); //example calling redux action
+        }
+      }
+
     
     viewfiles = async() =>{
         try {
+            //const url = `https://affectuslive.herokuapp.com/savefile/viewfiles?country=${this.state.pais}`
+            console.log("pais-->",this.state.pais);            
             const url = `https://affectuslive.herokuapp.com/savefile/viewfiles?country=${this.state.pais}`
             let res = await fetch(url)
             let data = await res.json()
@@ -30,20 +45,23 @@ class DeleteFile extends React.Component{
         } catch (error) {
             console.log(error);
         }
-    }
-    
-    delete = () =>{
-        console.log("se elimino file");        
-    }
 
-    dowlandFile = (archivo) => {
-        try {
-            const url = `https://affectuslive.herokuapp.com/savefile/download?pais=${this.state.pais}&filename=${archivo}`
-            window.open(`${url}`)
-        } catch (error) {
-            console.log(error);
+        if (this.state.band) {
+            await this.setState({
+                band: false
+            })
         }
     }
+    
+    delete = async(file) =>{                
+        console.log("se elimino file",file);   
+        const url = `https://affectuslive.herokuapp.com/savefile/deletefile?pais=${this.state.pais}&link=${file}`
+        let res = await fetch(url)
+        //let data = await res.json()
+        console.log(res.data);
+        this.viewfiles()
+    }
+    
 
     handleRuta = async (event) =>{
         await this.setState({
@@ -55,27 +73,17 @@ class DeleteFile extends React.Component{
 
     render() {
         return (
-            <div>
-                <label>selecciona el estado</label>
-                <select value={this.state.pais} onChange={this.handleRuta}>
-                    <option value="colima">Colima</option>
-                    <option value="italia">Italia</option>
-                    <option value="spain">España</option>
-                    <option value="france">Francia</option>
-                    <option value="eua">EUA</option>
-                    <option value="mexico">Mexico</option>
-                    <option value="panama">Panama</option>
-                </select>            
+            <div>                          
                 {
                     this.state.nameFile.map((i,index)=>{
                         return(
                             <div className="card w-50" key={index}>
                                 <div className="card-body">
-                                    <h5 className="card-title">archivo de {this.state.pais}</h5>
+                                    <h5 className="card-title">archivo de {this.props.ruta}</h5>
                                     <a href='#' onClick={() => this.dowlandFile(i)} className="card-text">{i}</a>
                                     <br></br>
                                     <br></br>
-                                    <a href="#" onClick={() => this.delete(i)} className="btn btn-danger">Eliminar</a>
+                                    <a href="#" onClick={(e) => this.delete(i)} className="btn btn-danger">Eliminar</a>
                                 </div>
                             </div>                            
                         )

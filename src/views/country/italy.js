@@ -6,7 +6,7 @@ class Italy extends React.Component{
             <div>
                 <h1>Italy country</h1>
                 <DowFile 
-                pais="italy"
+                pais="italia"
                 />
             </div>
         );

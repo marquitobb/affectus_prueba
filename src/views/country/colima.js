@@ -1,8 +1,7 @@
 import React from 'react'
 import DowFile from '../../components/dowland-file/dowFile';
 
-class Colima extends React.Component{
-    
+class Colima extends React.Component{    
     render() {
         return (
             <div>

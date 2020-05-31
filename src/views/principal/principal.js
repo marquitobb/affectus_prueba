@@ -10,6 +10,8 @@ import Panama from "../country/panama";
 import Spain from "../country/spain";
 //import { Link } from "react-router-dom";
 import FormSaveFile from '../../components/form-savefile/form-savefile'
+//using axios
+import axios from 'axios';
 
 class Principal extends React.Component{
     constructor(props) {
@@ -17,19 +19,31 @@ class Principal extends React.Component{
         this.state = {
             idUser: localStorage.getItem('mydata'),
             count: 'principal',
+            isAdmin: false
         }
+        //get info about user
         if (localStorage.getItem('mydata')) {
           console.log("session iniciada");
-        } else {
-          alert('debes iniciar session primero')
+        } else {          
           window.location='/';
         }
         console.log(localStorage.getItem('mydata'));
     }
     
     componentDidMount(){
-        //clear all session 
-        //localStorage.clear();
+      axios.post('http://localhost:4000/user/rol', {
+        id: this.state.idUser
+      })
+      .then((response) => {        
+        const data = response.data
+        console.log(data.rol);
+        var rol = data.rol
+        if (rol === 'admin') {
+          this.admin()
+        }
+      }, (error) => {
+        console.log(error);
+      });
     }
 
     actState = async(status) => {
@@ -37,12 +51,27 @@ class Principal extends React.Component{
         count: status
       })
     }
+
+    admin = async() =>{
+      await this.setState({
+        isAdmin: true
+      })
+    }
+
+    IsAdmin = () =>{
+      const admin = this.state.isAdmin
+      if (admin) {
+        return <a className="nav-link" onClick={() => this.actState('savefile')} href="#">subir archivo</a>                      
+      }else{
+        return null
+      } 
+    }
     
 
     render() {
         if (this.state.idUser) {
             return (
-              <div>
+              <div>                
                 <nav className="navbar navbar-expand-lg navbar-light" style={{backgroundColor: 'rgb(204, 202, 202)', color: 'black'}}>
                   <div className="container">
                     <a className="navbar-brand" href="#"><img src="/images/affectus_negro.png" width="45px" height="45px" /></a>
@@ -73,7 +102,11 @@ class Principal extends React.Component{
                           </div>
                         </li>
                       </ul>                      
-                      <a className="nav-link" onClick={() => this.actState('savefile')} href="#">subir archivo</a>                                            
+
+                      {
+                        this.IsAdmin()
+                      }                      
+
                       <form className="form-inline my-2 my-lg-0">
                         <a className="nav-link" href="/">Cerrar sesión</a>
                       </form>

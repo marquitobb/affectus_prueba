@@ -2,6 +2,9 @@
 import React from "react";
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+//using alert with toast
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 class Logindos extends React.Component{
     constructor(props) {
@@ -28,9 +31,7 @@ class Logindos extends React.Component{
 
     handleSubmit = async(evt) => {
         evt.preventDefault();
-        console.log(`correo--> ${this.state.Email}`)
-        console.log(`pass--> ${this.state.password}`)
-    
+        toast.info('espere un momento...')
         axios.post('https://affectuslive.herokuapp.com/user/login', {
             email: this.state.Email,
             pass: this.state.password
@@ -42,12 +43,12 @@ class Logindos extends React.Component{
           if (parseInt(data.status) === 1) {
             //var encryptedId = CryptoJS.AES.encrypt(data.id, 'secret key 123');
             //const encryptedId = cryptr.encrypt(data.id);
-            localStorage.setItem('mydata', data.id)
+            localStorage.setItem('mydata', data.id)            
             this.props.history.push("/main");
             //console.log( localStorage.getItem('mydata'));
             //window.location='/main'; //rediect page with js vanilla
           }else{
-            alert("usuario o contraseña incorrecta")
+            toast.error("usuario o contraseña incorrecta")            
           }
         }, (error) => {
           console.log(error);
@@ -58,6 +59,9 @@ class Logindos extends React.Component{
     render() {
         return (
             <div className="container">
+                <div className="form-group">
+                    <ToastContainer />
+                </div>
                 <div className="row">
                 <div className="col-md-3" />
                 <div className="col-md-6" style={{backgroundColor: 'rgb(204, 202, 202)', boxShadow: '0 0px 10px 1px', borderRadius: '3px', marginTop: '6%', marginBottom: '5%'}}>

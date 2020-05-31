@@ -31,7 +31,7 @@ class Principal extends React.Component{
     }
     
     componentDidMount(){
-      axios.post('http://localhost:4000/user/rol', {
+      axios.post('https://affectuslive.herokuapp.com/user/rol', {
         id: this.state.idUser
       })
       .then((response) => {        
@@ -74,14 +74,14 @@ class Principal extends React.Component{
               <div>                
                 <nav className="navbar navbar-expand-lg navbar-light" style={{backgroundColor: 'rgb(204, 202, 202)', color: 'black'}}>
                   <div className="container">
-                    <a className="navbar-brand" href="#"><img src="/images/affectus_negro.png" width="45px" height="45px" /></a>
+                    <a className="navbar-brand" onClick={() => this.actState('')} href="#"><img src="/images/affectus_negro.png" width="45px" height="45px" /></a>
                     <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                       <span className="navbar-toggler-icon" />
                     </button>
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
                       <ul className="navbar-nav mr-auto">
                         <li className="nav-item active">
-                          <a className="nav-link" href="#">Inicio <span className="sr-only">(current)</span></a>
+                          <a className="nav-link" onClick={() => this.actState('')} href="#">Inicio <span className="sr-only">(current)</span></a>
                         </li>
                         <li className="nav-item">
                           <a className="nav-link" href="#">¿Quienes somos?</a>
@@ -144,7 +144,7 @@ function Country(props) {
     case 'spain':
       return <Spain />;
     case 'savefile':
-      return <FormSaveFile />;
+      return <FormSaveFile />;;
     default:
       return <h1>Welcome</h1>;
   }

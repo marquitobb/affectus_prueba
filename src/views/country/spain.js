@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-no-target-blank */
 import React from 'react'
-
+import DowFile from '../../components/dowland-file/dowFile';
 class Spain extends React.Component{
     render() {
         return (
@@ -35,6 +35,9 @@ class Spain extends React.Component{
                         </div>
                         </div>
                     </div>
+                    <DowFile 
+                    pais="colima"
+                    />
                 </div>
             </div>
         );

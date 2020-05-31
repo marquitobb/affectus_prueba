@@ -1,6 +1,8 @@
 import React from 'react'
 import axios from 'axios';
-
+import DeleteFile from '../delete-file/deleteFile';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 class FormSaveFile extends React.Component{
     constructor(props) {
         super(props);
@@ -33,33 +35,29 @@ class FormSaveFile extends React.Component{
         
         axios({
             method: 'post',
-            url: 'http://localhost:4000/savefile/subir',
+            url: 'https://affectuslive.herokuapp.com/savefile/subir',
             data: data,
             headers: {'Content-Type': 'multipart/form-data' }
         })
         .then(function (response) {
             //handle success
+            toast.success('Archivo guardado')
             console.log(response);
+            window.location.reload(false);
         })
         .catch(function (response) {
             //handle error
+            toast.error('Error archivo no guardado')
             console.log(response);
-        });
-
-        /*var data = {
-            file: this.state.ruta
-        }
-        axios.post("http://localhost:4000/savefile/subir", { 
-            ruta: this.state.ruta
-        },data).then(res => { // then print response status
-            console.log(res.statusText)            
-        })
-        */
+        });        
     }
 
     render() {
         return (
             <div>
+                <div className="form-group">
+                    <ToastContainer />
+                </div>                
                 <h1>Subir archivo en su pais</h1>
                 <input type="file" name="file" onChange={this.onChangeHandler}/>
                 {/*<input type="text" name="ruta" value={this.state.ruta} onChange={this.handleRuta}/>*/}
@@ -77,7 +75,7 @@ class FormSaveFile extends React.Component{
                 </select>
                 <br></br>
                 <br></br>
-                <button type="button" onClick={this.onClickHandler}>Enviar</button>
+                <button type="button" onClick={this.onClickHandler}>Enviar</button>                               
             </div>
         );
     }
